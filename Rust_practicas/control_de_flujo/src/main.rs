@@ -7,7 +7,7 @@ fn main() {
     println!("condition was false");
     }
 }
-*/
+
 fn main() {
     let number = 6;
     if number % 4 == 0 {
@@ -19,4 +19,16 @@ fn main() {
     } else {
     println!("number is not divisible by 4, 3, or 2");
     }
+}
+*/
+fn main() {
+    let mut counter = 0;
+    let result = loop {
+    counter += 1;
+    if counter == 10 {
+    break counter * 2;
+    }
+    };
+    assert_eq!(result, 20);
+    println!("{}",result)
 }
