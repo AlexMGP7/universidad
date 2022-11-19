@@ -20,7 +20,7 @@ fn main() {
     println!("number is not divisible by 4, 3, or 2");
     }
 }
-*/
+
 fn main() {
     let mut counter = 0;
     let result = loop {
@@ -31,4 +31,13 @@ fn main() {
     };
     assert_eq!(result, 20);
     println!("{}",result)
+}
+*/
+fn main() {
+    let mut number = 3;
+    while number != 0 {
+    println!("{}!", number);
+    number = number - 1;
+    }
+    println!("LIFTOFF!!!");
 }
