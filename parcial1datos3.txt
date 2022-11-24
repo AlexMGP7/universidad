@@ -29,3 +29,5 @@
         Sino
             Capicua <- Verdadero
         i = i + 1
+
+2.Metodo Ackerman
