@@ -1,0 +1,8 @@
+1.Metodo Capicua (Cadena E, TAM_ARR):Cadena
+    CONSTANTES
+    VARIABLES
+
+    TDA_Pila P      //Se declara el tipo de dato abstracto pila como P (Herencia)
+    Entero i <- 1   //Declaramos el contador en 1 por ser pseudocodigo
+    Cadena S
+    INICIO
