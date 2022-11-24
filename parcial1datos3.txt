@@ -1,4 +1,10 @@
-1.Metodo Capicua (Cadena E, TAM_ARR):Cadena
+//Este ejercicio dice que se compruebe si "una cifra es capicua", entonces, una cifra cualquiera
+//puede ser "1", por lo tanto, el ejercicioo esta mal redactado, y se quiere referir a
+//comprobar un conjunto de cifras (ej:"1234"), o tambien que sea un trampa y en realidad el Metodo
+//simplemente es leer una cifra y decir que es capicua porque siempre lo será
+//En este caso asumire que se quiere referir a un conjunto de cifras
+
+1.Metodo Capicua (Cadena E, TAM_ARR):Cadena //El size de la pila es el mismo del arreglo
     CONSTANTES
     VARIABLES
 
@@ -6,3 +12,20 @@
     Entero i <- 1   //Declaramos el contador en 1 por ser pseudocodigo
     Cadena S
     INICIO
+    Repetir
+        P.Push (P, E[i])
+        i<-i+1
+    Hasta i = TAM_ARR
+
+    Repetir
+        S <- S + P.Cima (P)
+        P.Pop(P)
+    Hasta P.Vacia(P)
+
+    i = 1
+    Repetir
+        Si E[i] != S[i] entonces
+            Capicua <- Falso
+        Sino
+            Capicua <- Verdadero
+        i = i + 1
