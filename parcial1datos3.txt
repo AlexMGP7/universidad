@@ -9,7 +9,7 @@
     VARIABLES
 
     TDA_Pila P      //Se declara el tipo de dato abstracto pila como P (Herencia)
-    Entero i <- 1   //Declaramos el contador en 1 por ser pseudocodigo
+    entero i <- 1   //Declaramos el contador en 1 por ser pseudocodigo
     Cadena S
     INICIO
     Repetir
@@ -29,6 +29,7 @@
         Sino
             Capicua <- Verdadero
         i = i + 1
+FinMetodo
 
 2.Metodo Ackerman
 //A(0,n) = n+1
@@ -58,3 +59,87 @@
                 P.Push(m-1,P)
                 P.Push(m,P)
     Ackerman <- n
+FinMetodo
+
+3.TDA_Multi_Pilas = Clase de
+    // Atributos
+    entero MAX_PILA
+    entero Top1 <- 0
+    entero Top2 <- MAX_PILA
+    arreglo multi[MAX_PILA]
+
+    // Metodos
+    Metodo Llena -> boolean
+    INICIO
+        Si multi[Top1+1] = multi[Top2]
+            Llena <- Verdadero
+        Sino
+            Llena <- Falso
+        Finsi
+    FinMetodo
+
+    Metodo Cima1 (TDA_Multi_Pilas multi[])
+    INICIO
+        Si no (Vacia(P)) entonces
+            Cima1 <- P.multi[Top1]
+        Sino
+            Escribir ('pila vacia')
+        Finsi
+    FinMetodo
+
+    Metodo Cima2(TDA_Multi_Pilas P[])
+    INICIO
+        Si no (Vacia(P)) entonces
+            Cima2 <- P.s[Top2]
+        Sino
+            Escribir ('pila vacia')
+        Finsi
+    FinMetodo
+
+    Metodo vacia (tda_pila p) -> boolean
+    INICIO
+        Si (Top1=0 ^ Top2=Tamaño_Arr) entonces
+            vacia <- Verdadero
+        Sino
+            vacia <- Falso
+        Finsi
+    FinMetodo
+
+    Metodo Push1(TDA_Multi_Pilas, entero E)
+        INICIO
+        Si no(Llena (P.multi[])) entonces //si no está Llena
+            Top1<- Top1+1
+            P.M[Top1]<- E
+        Sino
+            Escribir ('stack overflow ')
+        Finsi
+    FinMetodo
+
+    Metodo Pop1(TDA_Multi_Pilas)
+        INICIO
+        Si no (vacia (p.multi[])) entonces
+            Top1<- Top1-1
+        Sino
+            Escribir ('stack underflow ')
+        Finsi
+        FinMetodo
+
+    Metodo Push2(TDA_Multi_Pilas, entero E)
+        INICIO
+        Si no (Llena (P.multi[])) entonces //si no está Llena
+            Top2<- Top2-1
+            P.M[Top1]<- E
+        Sino
+            Escribir ('stack overflow ')
+        Finsi
+    FinMetodo
+
+    Metodo Pop2(TDA_Multi_Pilas)
+        INICIO
+        Si no (vacia (p.multi[])) entonces
+            Top2<- Top2+1
+        Sino
+            Escribir ('stack underflow ')
+        Finsi
+    FinMetodo
+FinTDA
