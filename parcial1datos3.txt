@@ -31,3 +31,24 @@
         i = i + 1
 
 2.Metodo Ackerman
+//A(0,n) = n+1
+//A(m+1,0) = A(m,1)
+//A(m+1,n+1) = A(m,A(m+1,n))
+
+Ack(m,n):
+    init-stack(s)
+    push(m,s)
+    while not empty?(s) do
+        m := top(s)
+        pop(s)
+        if m=0 then
+                n := n+1
+        else
+        if  n=0 then
+                n := 1
+                push(m-1,s)
+        else
+                n := n-1
+                push(m-1,s)
+                push(m,s)
+    return(n)
