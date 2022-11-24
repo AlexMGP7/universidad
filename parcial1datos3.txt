@@ -4,7 +4,7 @@
 //simplemente es leer una cifra y decir que es capicua porque siempre lo será
 //En este caso asumire que se quiere referir a un conjunto de cifras
 
-1.Metodo Capicua (Cadena E, TAM_ARR):Cadena //El size de la pila es el mismo del arreglo
+1.Metodo Capicua (Arreglo E, TAM_ARR):Cadena //El size de la pila es el mismo del arreglo
     CONSTANTES
     VARIABLES
 
@@ -35,20 +35,26 @@
 //A(m+1,0) = A(m,1)
 //A(m+1,n+1) = A(m,A(m+1,n))
 
-Ack(m,n):
-    init-stack(s)
-    push(m,s)
-    while not empty?(s) do
-        m := top(s)
-        pop(s)
-        if m=0 then
-                n := n+1
-        else
-        if  n=0 then
-                n := 1
-                push(m-1,s)
-        else
-                n := n-1
-                push(m-1,s)
-                push(m,s)
-    return(n)
+    CONSTANTES
+    VARIABLES
+
+    TDA_Pila P
+    entero m
+
+    INICIO
+
+    P.Push(m,P)
+    Mientras no(P.Vacia) Hacer
+        m <- P.Cima(P)
+        P.Pop(P)
+        Si m=0 entonces
+            n <- n+1
+        Sino
+            Si  n=0 entonces
+                n <- 1
+                P.Push(m-1,P)
+        Sino
+                n <- n-1
+                P.Push(m-1,P)
+                P.Push(m,P)
+    Ackerman <- n
