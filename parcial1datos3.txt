@@ -183,10 +183,10 @@ Cola_Med = Clase de
     Variables:
         ˆTDA_CM Aux
     Inicio:
-        Si NO(Vacia(X)) entonces
+        Si no(Vacia(X)) entonces
             Caso Frente.clase_sos
      sea:
-            'N':Si NO(Frente = Nulo) entonces
+            'N':Si no(Frente = Nulo) entonces
                     Aux <- Frente
                     Si (Frente = E_Nob) entonces
                         Frente <- Nulo
