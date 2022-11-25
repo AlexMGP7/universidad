@@ -4,31 +4,32 @@
 //simplemente es leer una cifra y decir que es capicua porque siempre lo será
 //En este caso asumire que se quiere referir a un conjunto de cifras
 
-1.Metodo Capicua (Arreglo E, TAM_ARR):Cadena //El size de la pila es el mismo del arreglo
+1.Metodo Capicua (entero cifras) -> boolean
     CONSTANTES
     VARIABLES
+    boolean Comprobar
+    entero aux
+    TDA_Pila P
 
-    TDA_Pila P      //Se declara el tipo de dato abstracto pila como P (Herencia)
-    entero i <- 1   //Declaramos el contador en 1 por ser pseudocodigo
-    Cadena S
     INICIO
-    Repetir
-        P.Push (P, E[i])
-        i<-i+1
-    Hasta i = TAM_ARR
+        Mientras cifras > 9
+            P.Push(P, cifras % 10)
+            cifras <-  cifras / 10
+        FinMientras
 
-    Repetir
-        S <- S + P.Cima (P)
-        P.Pop(P)
-    Hasta P.Vacia(P)
+        P.Push(P,cifras)
+        Comprobar <- Verdadero
 
-    i = 1
-    Repetir
-        Si E[i] != S[i] entonces
-            Capicua <- Falso
-        Sino
-            Capicua <- Verdadero
-        i = i + 1
+        Mientras (Comprobar = Verdadero)
+            Si (cifras % 10) = P.Top
+                P.Pop(P,Top)
+                cifras <- cifras / 10
+            Sino
+                Comprobar = Falso
+        FinMientras
+
+        Capicua <- Comprobar
+
 FinMetodo
 
 2.Metodo Ackerman(entero m, entero n)
