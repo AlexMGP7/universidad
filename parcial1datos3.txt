@@ -83,7 +83,7 @@ FinMetodo
         Si no (Vacia(P)) entonces
             Cima1 <- P.multi[Top1]
         Sino
-            Escribir ('pila vacia')
+            Escribir ("Pila vacia")
         Finsi
     FinMetodo
 
@@ -92,16 +92,16 @@ FinMetodo
         Si no (Vacia(P)) entonces
             Cima2 <- P.s[Top2]
         Sino
-            Escribir ('pila vacia')
+            Escribir ("Pila vacia")
         Finsi
     FinMetodo
 
-    Metodo vacia (tda_pila p) -> boolean
+    Metodo Vacia (tda_pila p) -> boolean
     INICIO
         Si (Top1=0 ^ Top2=Tamaño_Arr) entonces
-            vacia <- Verdadero
+            Vacia <- Verdadero
         Sino
-            vacia <- Falso
+            Vacia <- Falso
         Finsi
     FinMetodo
 
@@ -111,16 +111,16 @@ FinMetodo
             Top1<- Top1+1
             P.M[Top1]<- E
         Sino
-            Escribir ('stack overflow ')
+            Escribir ("Pila llena")
         Finsi
     FinMetodo
 
     Metodo Pop1(TDA_Multi_Pilas)
         INICIO
-        Si no (vacia (p.multi[])) entonces
+        Si no (Vacia (p.multi[])) entonces
             Top1<- Top1-1
         Sino
-            Escribir ('stack underflow ')
+            Escribir ("Pila llena")
         Finsi
         FinMetodo
 
@@ -130,16 +130,16 @@ FinMetodo
             Top2<- Top2-1
             P.M[Top1]<- E
         Sino
-            Escribir ('stack overflow ')
+            Escribir ("Pila llena")
         Finsi
     FinMetodo
 
     Metodo Pop2(TDA_Multi_Pilas)
         INICIO
-        Si no (vacia (p.multi[])) entonces
+        Si no (Vacia (p.multi[])) entonces
             Top2<- Top2+1
         Sino
-            Escribir ('stack underflow ')
+            Escribir ("Pila llena")
         Finsi
     FinMetodo
 FinTDA
