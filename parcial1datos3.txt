@@ -12,12 +12,11 @@
     TDA_Pila P
 
     INICIO
-        Mientras cifras > 9
+        Mientras cifras > 0
             P.Push(P, cifras % 10)
             cifras <-  cifras / 10
         FinMientras
 
-        P.Push(P,cifras)
         Comprobar <- Verdadero
 
         Mientras (Comprobar = Verdadero)
@@ -32,7 +31,7 @@
 
 FinMetodo
 
-2.Metodo Ackerman(entero m, entero n)
+P.Metodo Ackerman(entero m, entero n)
 //A(0,n) = n+1
 //A(m+1,0) = A(m,1)
 //A(m+1,n+1) = A(m,A(m+1,n))
@@ -142,7 +141,7 @@ FinMetodo
             Escribir ("Pila llena")
         Finsi
     FinMetodo
-FinTDA
+FinClase
 
 4.TDA_CM = Clase de
     // Atributos del nodo
@@ -150,65 +149,69 @@ FinTDA
     ˆTDA_CM sig,ant
 FinClase
 
-Cola_Med = Clase de
-    ˆTDA_CM Frente // Misma salida
-    ˆTDA_CM E_Ple,E_Nob // Diferentes entradas con prioridad a la nobleza
-    ˆTDA_CM CM // Cola multiple contenedor
+ColaMD = Clase de
+    ˆTDA_CM Frente //Salida
+    ˆTDA_CM E_Plebeyo,E_Noble //Entradas
+    ˆTDA_CM CM // Bicola contenedora
     // Metodos
-    Metodo Meter (Cola_Med X,ˆTDA_CM E,Caracter c)
+
+    Metodo Desencolar (ColaMD X) //Metodo para desencolar de la Pila
+    CONSTANTES
     VARIABLES
+        ˆTDA_CM Aux //Auxiliar para no perjudicar el dato q necesitamos
     INICIO
-        Si (Vacia(X)) entonces
-            Caso c sea:
-            'N':X.E_Nob <- E
-                X.Frente <- E
-            'P':X.E_Ple <- E
-                X.Frente <- E
-            FinCaso
-            X.Insertar_Inicio(X,E)
-        Sino
-            Caso c sea:
-            'N':Si (Frente.clase_sos = 'P') entonces
-                    X.E_Nob <- E
-                    X.Frente <- E
-                Sino
-                    X.E_Nob <- E
-                FinSi
-            'P':X.E_Ple <- E
-            FinCaso
-            X.Insertar_Fin_Seg(X,E)
-        FinSi
-    FinMetodo
-    Metodo Atender (Cola_Med X)
-    Variables:
-        ˆTDA_CM Aux
-    Inicio:
         Si no(Vacia(X)) entonces
-            Caso Frente.clase_sos
-     sea:
-            'N':Si no(Frente = Nulo) entonces
-                    Aux <- Frente
-                    Si (Frente = E_Nob) entonces
-                        Frente <- Nulo
+            Caso Frente.clase_sos sea:
+                '1':Si no(Frente = Nulo)  //Si no hay valor en frente entonces
+                        Aux <- Frente
+                        Si (Frente = E_Noble) entonces
+                            Frente <- Nulo //Si el frente es un noble se le asigna nulo
+                        Sino
+                            Frente <- Frente.ˆsig
+                        FinSi
                     Sino
-                        Frente <- Frente.ˆsig
+                        Escribir "No hay ninguna persona a la cual atender"
                     FinSi
-                Sino
-                    Escribir "No hay ninguna persona a la cual atender"
-                FinSi
-            'P':Si (E_Nob = Nulo) entonces
-                    Aux <- Frente
-                    Si (Frente = E_Ple) entonces
-                        Frente <- Nulo
+                '2':Si (E_Noble = Nulo) entonces //Si no hay noble entonces
+                        Aux <- Frente
+                        Si (Frente = E_Plebeyo) entonces
+                            Frente <- Nulo
+                        Sino
+                            Frente <- Frente.ˆsig
+                        FinSi
                     Sino
-                        Frente <- Frente.ˆsig
+                        Escribir "No es posible eliminarse, hay nobles sin atender"
                     FinSi
-                 Sino
-                    Escribir "No es posible eliminarse, hay nobles sin atender"
-                 FinSi
             FinCaso
         Sino
             Escribir "No hay personas para atender"
         FinSi
     FinMetodo
+
+    Metodo Encolar (ColaMD X,ˆTDA_CM E,entero n) //Metodo para encolar
+    CONSTANTES
+    VARIABLES
+    INICIO
+        Si (Vacia(X)) entonces
+            Caso n sea: //El caso 1 es noble y el P es plebeyo, asi con todos
+                '1':X.E_Noble <- E //A noble de la bicola se la asigna el nodo entrante
+                    X.Frente <- E //A el frente de la bicola se le asigna el nodo entrante
+                '2':X.E_Plebeyo <- E //A plebeyo de la bicola se le asigna el nodo entrante
+                    X.Frente <- E //A el frente de la bicola se le asigna el nodo entrante
+                FinCaso
+                X.Insertar_Inicio(X,E)//Se inserta en la bicola el nodo entrante
+        Sino
+            Caso n sea:
+                '1':Si (Frente.clase_sos = 'P') entonces //Si el frente es un plebeyo entonces
+                        X.E_Noble <- E //A noble de la bicola se la asigna el nodo entrante
+                        X.Frente <- E //A el frente de la bicola se le asigna el nodo entrante
+                    Sino
+                        X.E_Noble <- E //A noble de la bicola se la asigna el nodo entrante
+                    FinSi
+                '2':X.E_Plebeyo <- E //A plebeyo de la bicola se la asigna el nodo entrante
+            FinCaso
+            X.Insertar_Fin_Seg(X,E) //Se inserta en la bicola el nodo entrante
+        FinSi
+    FinMetodo
+
 FinClase
