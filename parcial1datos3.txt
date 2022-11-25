@@ -143,3 +143,72 @@ FinMetodo
         Finsi
     FinMetodo
 FinTDA
+
+4.TDA_CM = Clase de
+    // Atributos del nodo
+    Caracter clase_sos
+    ˆTDA_CM sig,ant
+FinClase
+
+Cola_Med = Clase de
+    ˆTDA_CM Frente // Misma salida
+    ˆTDA_CM E_Ple,E_Nob // Diferentes entradas con prioridad a la nobleza
+    ˆTDA_CM CM // Cola multiple contenedor
+    // Metodos
+    Metodo Meter (Cola_Med X,ˆTDA_CM E,Caracter c)
+    VARIABLES
+    INICIO
+        Si (Vacia(X)) entonces
+            Caso c sea:
+            'N':X.E_Nob <- E
+                X.Frente <- E
+            'P':X.E_Ple <- E
+                X.Frente <- E
+            FinCaso
+            X.Insertar_Inicio(X,E)
+        Sino
+            Caso c sea:
+            'N':Si (Frente.clase_sos = 'P') entonces
+                    X.E_Nob <- E
+                    X.Frente <- E
+                Sino
+                    X.E_Nob <- E
+                FinSi
+            'P':X.E_Ple <- E
+            FinCaso
+            X.Insertar_Fin_Seg(X,E)
+        FinSi
+    FinMetodo
+    Metodo Atender (Cola_Med X)
+    Variables:
+        ˆTDA_CM Aux
+    Inicio:
+        Si NO(Vacia(X)) entonces
+            Caso Frente.clase_sos
+     sea:
+            'N':Si NO(Frente = Nulo) entonces
+                    Aux <- Frente
+                    Si (Frente = E_Nob) entonces
+                        Frente <- Nulo
+                    Sino
+                        Frente <- Frente.ˆsig
+                    FinSi
+                Sino
+                    Escribir "No hay ninguna persona a la cual atender"
+                FinSi
+            'P':Si (E_Nob = Nulo) entonces
+                    Aux <- Frente
+                    Si (Frente = E_Ple) entonces
+                        Frente <- Nulo
+                    Sino
+                        Frente <- Frente.ˆsig
+                    FinSi
+                 Sino
+                    Escribir "No es posible eliminarse, hay nobles sin atender"
+                 FinSi
+            FinCaso
+        Sino
+            Escribir "No hay personas para atender"
+        FinSi
+    FinMetodo
+FinClase
