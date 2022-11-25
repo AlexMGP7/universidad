@@ -31,7 +31,7 @@
         i = i + 1
 FinMetodo
 
-2.Metodo Ackerman
+2.Metodo Ackerman(entero m, entero n)
 //A(0,n) = n+1
 //A(m+1,0) = A(m,1)
 //A(m+1,n+1) = A(m,A(m+1,n))
@@ -40,11 +40,10 @@ FinMetodo
     VARIABLES
 
     TDA_Pila P
-    entero m
 
     INICIO
 
-    P.Push(m,P)
+    P.Push(P,m)
     Mientras no(P.Vacia) Hacer
         m <- P.Cima(P)
         P.Pop(P)
@@ -53,11 +52,11 @@ FinMetodo
         Sino
             Si  n=0 entonces
                 n <- 1
-                P.Push(m-1,P)
+                P.Push(P,m-1)
         Sino
                 n <- n-1
-                P.Push(m-1,P)
-                P.Push(m,P)
+                P.Push(P,m-1)
+                P.Push(P,m)
     Ackerman <- n
 FinMetodo
 
