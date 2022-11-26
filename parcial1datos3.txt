@@ -1,9 +1,3 @@
-//Este ejercicio dice que se compruebe si "una cifra es capicua", entonces, una cifra cualquiera
-//puede ser "1", por lo tanto, el ejercicioo esta mal redactado, y se quiere referir a
-//comprobar un conjunto de cifras (ej:"1234"), o tambien que sea un trampa y en realidad el Metodo
-//simplemente es leer una cifra y decir que es capicua porque siempre lo será
-//En este caso asumire que se quiere referir a un conjunto de cifras
-
 1.Metodo Capicua (entero cifras) -> boolean
     CONSTANTES
     VARIABLES
@@ -241,10 +235,40 @@ INICIO
     FinMientras
     Verificador = Verdadero <- Si no se devuelve el verificador en falso entonces es verdadero
 
-6.TDA ColaCM = Clase de //Cola contesto-molesto
-    //Atributos
-    ^Fte_baja_pr
-    ^Fte_alta_pr
+6.TDA_colaCM = Clase de //La cola con 2 frentes y la estructura
+    ^Fte_baja_pri
+    ^Fte_alta_pri
     ^Nodo LDE Bi
-    //Metodos
-    
+
+TDA_persona = Clase de
+    //VARIABLES
+    entero llegada
+    entero prioridad
+    ^TDA_persona sig,ant
+
+//Metodo
+Metodo Simulacion (TDA_colaCM CPSI, entero T)
+CONSTANTES
+VARIABLES
+    Entero Humor // estado de animo 0 molesto 1 feliz
+    Entero i
+
+INICIO
+    T = T * 60 // cada ciclo es un minuto
+    Para i hasta i = T paso 1
+        Humor <- random (0,1)
+        Persona.llegada <- random (0,1)   // Se comprueba la llegada
+        Persona.prioridad <- random (0,1)  // Se genera su prioridad
+
+        Si persona.llegada = 1 // si llega una persona se mete a la cola
+            CPSI.Encolar(CPSI, persona_e)
+
+        Mientras CPSI no Vacia(CPSI) && Humor = 0 // si no esta vacia el Humor esta bajo atiende a la gente de baja prioridad
+            Si persona_e.prioridad = 0
+                CPSI.desencolar(persona_e)
+
+        Mientras CPSI no Vacia(CPSI) && Humor = 1 // si no esta vacia el Humor esta alto atiende a la gente de alta prioridad
+        Si persona_e.prioridad = 1
+            CPSI.desencolar(persona_e)
+    FinPara
+FinMetodo
