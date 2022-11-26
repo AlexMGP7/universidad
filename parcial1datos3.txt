@@ -7,19 +7,19 @@
 1.Metodo Capicua (entero cifras) -> boolean
     CONSTANTES
     VARIABLES
-    boolean Comprobar
-    entero aux
-    TDA_Pila P
+    boolean Comprobar //Variable para poder devolver el valor boolean (funciona como auxiliar)
+    entero aux //Auxiliar para no perder el dato
+    TDA_Pila P //Se hereda la pila
 
     INICIO
-        Mientras cifras > 0
+        Mientras cifras > 0 //Mientras que la cifra sea mayor a 0 entonces se va agregando a la pila
             P.Push(P, cifras % 10)
             cifras <-  cifras / 10
         FinMientras
 
         Comprobar <- Verdadero
 
-        Mientras (Comprobar = Verdadero)
+        Mientras (Comprobar = Verdadero) //Se comprueba si es capicua
             Si (cifras % 10) = P.Top
                 P.Pop(P,Top)
                 cifras <- cifras / 10
@@ -31,7 +31,7 @@
 
 FinMetodo
 
-P.Metodo Ackerman(entero m, entero n)
+2.Metodo Ackerman(entero m, entero n)
 //A(0,n) = n+1
 //A(m+1,0) = A(m,1)
 //A(m+1,n+1) = A(m,A(m+1,n))
@@ -43,24 +43,24 @@ P.Metodo Ackerman(entero m, entero n)
 
     INICIO
 
-    P.Push(P,m)
-    Mientras no(P.Vacia) Hacer
-        m <- P.Cima(P)
+    P.Push(P,m) //Se agrega m a la pila
+    Mientras no(P.Vacia) Hacer //Mientras que la pila no vacia, se repite
+        m <- P.Cima(P) // a m se le asigna el tope de la pila
         P.Pop(P)
-        Si m=0 entonces
+        Si m=0 entonces //condicional de la funcion Ackerman
             n <- n+1
         Sino
             Si  n=0 entonces
                 n <- 1
-                P.Push(P,m-1)
+                P.Push(P,m-1) //Se usa recursion en la pila
         Sino
                 n <- n-1
-                P.Push(P,m-1)
+                P.Push(P,m-1)//Se usa recursion en la pila
                 P.Push(P,m)
-    Ackerman <- n
+    Ackerman <- n //Ackerman devuelve el valor n
 FinMetodo
 
-3.TDA_Multi_Pilas = Clase de
+3.TDA_Multi_Pilas = Clase de //Se utiliza un arreglo para meter las pilas, en este caso una de derecha a izquiera y otra al reves
     // Atributos
     entero MAX_PILA
     entero Top1 <- 0
@@ -68,34 +68,34 @@ FinMetodo
     arreglo multi[MAX_PILA]
 
     // Metodos
-    Metodo Llena -> boolean
+    Metodo Llena -> boolean //Metodo para saber si la pila esta llena
     INICIO
-        Si multi[Top1+1] = multi[Top2]
+        Si (multi[Top1+1]) = multi[Top2]
             Llena <- Verdadero
         Sino
             Llena <- Falso
         Finsi
     FinMetodo
 
-    Metodo Cima1 (TDA_Multi_Pilas multi[])
+    Metodo Cima1 (TDA_Multi_Pilas multi[]) //Saber el valor del tope de la pila 1
     INICIO
         Si no (Vacia(P)) entonces
             Cima1 <- P.multi[Top1]
         Sino
-            Escribir ("Pila vacia")
+            Escribir ("Pila Vacia")
         Finsi
     FinMetodo
 
-    Metodo Cima2(TDA_Multi_Pilas P[])
+    Metodo Cima2(TDA_Multi_Pilas P[])//Saber el valor del tope de la pila 2
     INICIO
         Si no (Vacia(P)) entonces
             Cima2 <- P.s[Top2]
         Sino
-            Escribir ("Pila vacia")
+            Escribir ("Pila Vacia")
         Finsi
     FinMetodo
 
-    Metodo Vacia (tda_pila p) -> boolean
+    Metodo Vacia (tda_pila p) -> boolean //Saber si la pila esta Vacia
     INICIO
         Si (Top1=0 ^ Top2=Tamaño_Arr) entonces
             Vacia <- Verdadero
@@ -104,7 +104,7 @@ FinMetodo
         Finsi
     FinMetodo
 
-    Metodo Push1(TDA_Multi_Pilas, entero E)
+    Metodo Push1(TDA_Multi_Pilas, entero E) //Meter un nodo en la pila 1
         INICIO
         Si no(Llena (P.multi[])) entonces //si no está Llena
             Top1<- Top1+1
@@ -215,3 +215,36 @@ ColaMD = Clase de
     FinMetodo
 
 FinClase
+
+5.Tda_nodo = Clase de
+    Cadena Valor
+    ^Tda_nodo sig,ant
+Fin Clase
+
+Metodo Verificador(Tda_cola A,Tda_cola B) -> boolean
+CONSTANTES
+VARIABLES
+    boolean resultado //auxiliar
+    Tda_nodo N //Se hereda el nodo
+INICIO
+    Mientras (no (B.Vacia(B)) || no (resultado = Falso)) //Mientrasla pila no este vacia o el verificador sea falso
+        Si B.Frente = 'X' //Si el frente en b vale X entonces se desencola en a
+            Si no (A.Vacia(A))
+                A.desencolar(A)
+            Sino
+                Escribir "No funciona"
+                resultado <- Falso
+                Verificador <- resultado //Devuelve que no se pudo verificar
+        Si B.Frente = 'S' //Si el frente de b es S entonces se desencola en b
+            A.Encolar(A,N.valor <- '#')
+        b.desencolar(B)
+    FinMientras
+    Verificador = Verdadero <- Si no se devuelve el verificador en falso entonces es verdadero
+
+6.TDA ColaCM = Clase de //Cola contesto-molesto
+    //Atributos
+    ^Fte_baja_pr
+    ^Fte_alta_pr
+    ^Nodo LDE Bi
+    //Metodos
+    
