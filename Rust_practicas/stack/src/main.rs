@@ -1,81 +1,82 @@
-struct Nodopi<String>{
-    precio: String,
-    nombrepro: String
+struct NodoPila<String>{ //Se crea el nodo de la pila con valores unicamente string
+    p_precio: String, //El precio del producto
+    p_nombre: String, //El nombre del producto
 }
-impl Nodopi<String> {
+impl NodoPila<String> {
+    /*
     fn nuevoep()->Self {
-        Nodopi{precio:"ª".to_string(),nombrepro:"ª".to_string()}
-    }
-    fn nuevo(precio:String,nombre:String)->Self {
-        Nodopi{precio:precio,nombrepro:nombre}
+        NodoPila{p_precio:"ª".to_string(),p_nombre:"ª".to_string()}
+    }*/
+    fn nuevo(p_precio:String,nombre:String)->Self { //Funcion que crea un nuevo NodoPila (producto)
+        NodoPila{p_precio:p_precio,p_nombre:nombre} //A la izquierda va el p_precio por parametros y a la derecha el nombre del producto
     }
 }
-struct Pila<Nodopi>{
-    tope: usize,
-    tamax:usize,
-    arreglo: Vec<Nodopi>
+struct Pila<NodoPila>{ //Se crea la pila del nodo de la pila
+    top: usize, //El tope de la pila, lo usamos como un indice, no contiene informacion
+    size:usize, //El tamaño maximo de la pila
+    array: Vec<NodoPila>, //El arryglo de vectores de la pila
 }
-impl Pila<Nodopi<String>> {
-    fn nueva(tamax:usize)->Self {
-        let mut i =0;
-        let mut arre=Vec::new();
-        while i<tamax.clone(){
-            arre.push(Nodopi{precio:"ª".to_string(),nombrepro:"ª".to_string()});
+impl Pila<NodoPila<String>> { //Los metodos de la pila (tiene su nodo de string)
+    fn nueva(size:usize)->Self { //Metodo para crear una pila nueva del tamaño indicado por parametro
+        let mut i = 0; //Contador
+        let mut arry=Vec::new(); //El arreglo de la pila como vector
+        while i<size.clone(){ //Se rellena todo el arreglo de la pila, o se "inicializa"
+            arry.push(NodoPila{p_precio:"".to_string(),p_nombre:"".to_string()});
             i=i+1;
         }
-        Pila { tope: 01, tamax: tamax,arreglo:arre}
+        Pila { top: 1, size: size,array:arry} //
     }
-    fn llena(&mut self)->bool{
-        if self.tope >=self.tamax{
+    fn llena(&mut self)->bool{ //Metodo booleano para saber si la pila esta llena
+        if self.top >=self.size{ //Si el tope es mayor o igual que el tamaño de la pila, entonces esta llena
             true
         }else {
             false
         }
     }
-    fn vacio(&mut self)->bool {
-        if self.tope==0{
+    fn vacio(&mut self)->bool { //Metodo booleano para saber si la pila esta vacia
+        if self.top==0{ //Si el tope vale 0, entonces la pila esta vacia
             true
         }else {
             false
         }
     }
-    fn push(&mut self, valor: Nodopi<String>) {
-        if !self.llena(){
-            self.arreglo[self.tope]=valor;
-            self.tope = self.tope +1;
+    fn push(&mut self, valor: NodoPila<String>) { //Metodo para hacer push a la pila con un elemento
+        if !self.llena(){ //Si la pila no esta llena...
+            self.array[self.top]=valor; //En la posicion del arreglo del tope, se agrega el elemento nuevo
+            self.top +=1; //A el tope se le suma uno
 
         }else {
-            print!("la pila esta llena ");
+            print!("Stack overflow");
         }
     }
-    fn cima(&mut self)-> &Nodopi<String> {
-
-
-        &self.arreglo[self.tope-1]
+    fn cima(&mut self)-> &NodoPila<String> { //Metodo para obtener el valor de la cima de la pila
+                                            //Devuelve el nodo de la pila que seria siempre el tope
+        &self.array[self.top-1]//
 
     }
-    fn pop(&mut self) {
-        if !self.vacio() {
-            self.tope = self.tope-1;
+    fn pop(&mut self) { //Metodo para eliminar el elemento ope de la pila
+        if !self.vacio() { //Si no esta vacia la pila...
+            self.top -= 1; //A el tope se le resta uno
         }else {
-            println!("estack underflow");
+            println!("stack overflow");
         }
     }
 
 }
 fn main() {
     let mut m = Pila::nueva(15);
-    let p="2.3".to_string();
+    let p="20".to_string();
     let n="harina".to_string();
-    m.push(Nodopi::nuevo(p, n));
-    let p="2.4".to_string();
-    let n="harina".to_string();
-    m.push(Nodopi::nuevo(p, n));
+    m.push(NodoPila::nuevo(p, n));
+    let p="10".to_string();
+    let n="azucar".to_string();
+    m.push(NodoPila::nuevo(p, n));
+
     let f = m.cima();
-    println!("{}",f.precio);
+    println!("{}, {}",f.p_precio,f.p_nombre);
     m.pop();
 
     let f = m.cima();
 
-    println!("{}",f.precio);
+    println!("{}, {}",f.p_precio,f.p_nombre);
 }
