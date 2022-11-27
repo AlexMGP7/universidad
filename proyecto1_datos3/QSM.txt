@@ -1,0 +1,9 @@
+Andrea 0.00 1
+Carla 0.00 2
+Pedro 0.00 0
+Harina_Pan 1.45, Dolce_Dia 1.35, Huevos_MedioC 2.77, Cafe_DellaNonna 6.25
+Harina_Mary_TodoUso 2.40, Lavaplatos_Peros 1.16, Aceite_Corcovado 2.24
+Harina_Pan 1.45,Harina_Pan 1.45,Harina_Pan 1.45,Harina_Pan 1.45,Harina_Pan 1.45,Harina_Pan 1.45,Harina_Pan 1.45,Harina_Pan 1.45
+Solomo_Cuerito 15.20, Pollo_Entero 17.99, Carne_Primera 9.89, Salchichas_Chop 8.00, Coca_Cola_2l 7.90
+Doritos_XL 0.00, Carorena 0.00, DeTodito 0.00, Coca_Cola_2l 2.00, Carta_Roja 2.11, Hielo_Detal 12.00
+Galletas_Sol 1.78, Brocoli 0.80, Aceite_Gallo 7.90, Zanahoria 3.00, Pasta_Primor_Dedal 2.22, Arroz_Mary 1.56, Acelga 2.15, Espinaca 4.10, Achicoria 3.20, Calabacin 3.18, Queso_Ricota 4.09, Yogurt_Griego 2.99 

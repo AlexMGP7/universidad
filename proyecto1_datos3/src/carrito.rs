@@ -60,7 +60,7 @@ impl Pila<NodoPila<String>> { //Los metodos de la pila (tiene su nodo de string)
     }
 
 }
-fn main() {
+pub fn imprimir() {
     let mut m = Pila::nueva(15);
     let p="20".to_string();
     let n="harina".to_string();
