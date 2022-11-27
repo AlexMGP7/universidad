@@ -2,16 +2,16 @@ struct NodoPila<String>{ //Se crea el nodo de la pila con valores unicamente str
     p_precio: String, //El precio del producto
     p_nombre: String, //El nombre del producto
 }
-impl NodoPila<String> {
+impl NodoPila<String> { //Los metodos del nodo de la pila
 
-    fn nuevo(p_precio:String,nombre:String)->Self { //Funcion que crea un nuevo NodoPila (producto)
-        NodoPila{p_precio:p_precio,p_nombre:nombre} //A la izquierda va el p_precio por parametros y a la derecha el nombre del producto
+    fn nuevo(precio:String,nombre:String)->Self { //Funcion que crea un nuevo NodoPila (producto)
+        NodoPila{p_precio:precio, p_nombre:nombre} //A la izquierda va el p_precio por parametros y a la derecha el nombre del producto
     }
 }
 struct Pila<NodoPila>{ //Se crea la pila del nodo de la pila
     top: usize, //El tope de la pila, lo usamos como un indice, no contiene informacion
     size:usize, //El tamaño maximo de la pila
-    array: Vec<NodoPila>, //El arryglo de vectores de la pila
+    array: Vec<NodoPila>, //El arreglo de vectores de la pila
 }
 impl Pila<NodoPila<String>> { //Los metodos de la pila (tiene su nodo de string)
     fn nueva(size:usize)->Self { //Metodo para crear una pila nueva del tamaño indicado por parametro
@@ -21,7 +21,7 @@ impl Pila<NodoPila<String>> { //Los metodos de la pila (tiene su nodo de string)
             arry.push(NodoPila{p_precio:"".to_string(),p_nombre:"".to_string()});
             i=i+1;
         }
-        Pila { top: 1, size: size, array:arry} //
+        Pila { top: 1, size: size, array:arry}
     }
     fn llena(&mut self)->bool{ //Metodo booleano para saber si la pila esta llena
         if self.top >=self.size{ //Si el tope es mayor o igual que el tamaño de la pila, entonces esta llena
