@@ -77,3 +77,4 @@ fn main() {
 
     println!("{}, {}",f.p_precio,f.p_nombre);
 }
+
