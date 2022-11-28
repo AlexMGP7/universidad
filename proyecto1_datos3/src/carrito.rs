@@ -1,4 +1,4 @@
-struct NodoPila<String>{ //Se crea el nodo de la pila con valores unicamente string
+pub struct NodoPila<String>{ //Se crea el nodo de la pila con valores unicamente string
     p_precio: String, //El precio del producto
     p_nombre: String, //El nombre del producto
 }
