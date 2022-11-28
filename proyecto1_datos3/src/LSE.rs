@@ -1,14 +1,18 @@
 pub struct LinkedList {
-    head: Link,
+    head: Link<T>,
 }
 
-impl LinkedList{
+impl LinkedList<u32> {}
 
-    fn empty() -> LinkedList {
+impl LinkedList<String> {}
+
+impl<T> LinkedList<T>{
+
+    fn empty() -> LinkedList<T> {
         LinkedList { head: None }
     }
 
-    fn push (&mut self, element: u32){
+    fn push (&mut self, element: T){
         let old_head: Option<Box<Node>> = self.head.take();
         let new_head: Box<Node> = Box:: new(Node {
             element,
@@ -17,20 +21,22 @@ impl LinkedList{
         self.head = Some(new_head);
     }
 
-    fn pop(&mut self) -> Option<u32>{
+    fn pop(&mut self) -> Option<T>{
         self.head.take().map(|n|{
             self.head = n.next;
             n.element
         })
     }
 
-    fn peak(&mut self) -> &u32{
+    fn peak(&self) -> Option<&T>{
 
     }
 
 }
 
-struct Node {
-    element: u32,
-    next: Link,
+struct Node<T> {
+    element: T,
+    next: Link<T>,
 }
+
+type Link<T> = Option<Box<Node<T>>>;
