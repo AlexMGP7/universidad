@@ -16,4 +16,21 @@ impl LinkedList{
         });
         self.head = Some(new_head);
     }
+
+    fn pop(&mut self) -> Option<u32>{
+        self.head.take().map(|n|{
+            self.head = n.next;
+            n.element
+        })
+    }
+
+    fn peak(&mut self) -> &u32{
+
+    }
+
+}
+
+struct Node {
+    element: u32,
+    next: Link,
 }
