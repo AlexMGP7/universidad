@@ -1,5 +1,5 @@
 use std::fs;
-use std::env;
+//use std::env;
 
 pub fn leer(){
     println!("Leyendo el archivo de entrada {}","QSM.txt");
