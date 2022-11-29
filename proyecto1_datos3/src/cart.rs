@@ -79,6 +79,10 @@ pub fn cart(){
     println!("{} {}",producto_en_la_cima.n_producto, producto_en_la_cima.p_precio);
     println!("El tope actualmente es: {}",carrito1.tope);
     let cant_productos=carrito1.cant_productos();
-    println!("Actualmente hay {} productos en el carrito",cant_productos)
+    println!("Actualmente hay {} productos en el carrito",cant_productos);
+    let borrar=carrito1.pop().unwrap();
+    println!("Sacando al producto {}",borrar.n_producto);
+    let producto_en_la_cima=carrito1.cima().unwrap();
+    println!("{} {}",producto_en_la_cima.n_producto, producto_en_la_cima.p_precio);
 
 }
