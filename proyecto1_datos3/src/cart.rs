@@ -21,12 +21,15 @@ impl Carrito {
     }
 
     fn pop(&mut self) -> Option<Producto>{
-        if self.vacia(){
-            println!("No se puede sacar otro producto del carro, esta lleno")
+        if !self.vacia(){
+            self.tope-=1;
+            return self.carrito.pop();
         }
-        else{
-            self.carrito.pop()
+        else {
+            println!("No se puede sacar el producto, carrito lleno");
+            return None;
         }
+
     }
 
     fn llena(&self) -> bool {
