@@ -1,27 +1,29 @@
-struct Producto{
-    n_producto:String,
-    p_precio:f64
+struct Producto{        //Se crea la estructura producto (Equivalente a un nodo hablando en un caso general)
+    n_producto:String,  //Nombre del producto
+    p_precio:f64        //Precio del producto
 }
 
-impl Producto {
-    fn producto_nuevo(precio:f64, producto:String)->Self{ Producto {
-        n_producto:producto, p_precio:precio,
+impl Producto {         //Las implementaciones del producto
+    fn producto_nuevo(precio:f64, producto:String)->Self{ Producto { //Funcion para crear un producto nuevo
+        n_producto:producto, p_precio:precio,   //Las variables de las estructuras valdran lo que se pase aca por parametros
     } }
 }
 
-struct Carrito{
-    carrito:Vec<Producto>,
-    max_productos:u32,
-    tope:u32,
+struct Carrito{     //Se crea la estructura Carrito (Equivalente a la pila hablando de un caso general)
+    carrito:Vec<Producto>,  //El contenedor de productos del carrito como vector
+    max_productos:u32,      //El maximo de productos para el carrito
+    tope:u32,               //El tope actual del carrito (Se utiliza mas o menos como un indice)
 }
 
-impl Carrito {
-    fn carrito_nuevo() -> Self{
+impl Carrito {      //Las implementaciones del carrito
+    fn carrito_nuevo() -> Self{     //Funcion para crear un carrito nuevo
         Carrito { carrito: (Vec::new()), max_productos: (15), tope: (0) }
+        //Se crea un vector (carrito) nuevo para meter los productos, se establece los maximos de productos
+        //Y se empieza del tope 0 (aunque se sumara a 1 con el push)
     }
 
-    fn pop(&mut self) -> Option<Producto>{
-        if !self.vacia(){
+    fn pop(&mut self) -> Option<Producto>{ //Funcion para eliminar el elemento en el tope, y devuelve su valor a la vez
+        if !self.vacia(){   //Si la pila no esta vacia entonces se resta uno al tope y se elimina el ultimo elemento pusheado
             self.tope-=1;
             return self.carrito.pop();
         }
@@ -32,7 +34,7 @@ impl Carrito {
 
     }
 
-    fn llena(&self) -> bool {
+    fn llena(&self) -> bool {       //Funcion para saber si el carrito esta lleno de productos
         if self.tope >= self.max_productos{
             true
         }
@@ -41,7 +43,7 @@ impl Carrito {
         }
         }
 
-    fn push(&mut self, producto_a_insertar: Producto){
+    fn push(&mut self, producto_a_insertar: Producto){  //Funcion para agregar un producto al carrito por el tope
         if self.llena(){
             println!("No se puede agregar mas productos, carrito lleno")
         }
@@ -51,20 +53,20 @@ impl Carrito {
         }
     }
 
-    fn vacia(&self) -> bool {
+    fn vacia(&self) -> bool {   //Funcion para saber si el carrito no tiene ningun producto
         self.carrito.is_empty()
     }
 
-    fn cant_productos(&self) -> usize {
-        self.carrito.len()
+    fn cant_productos(&self) -> usize {     //Funcion para saber cuantos productos hay
+        self.carrito.len()                  //No le veo mucha utilidad por ahora, pero se me ocurrio y es mejor tenerla :D
     }
 
-    fn cima(&self) -> Option<&Producto> {
+    fn cima(&self) -> Option<&Producto> {   //Funcion que devuelve el producto que esta en la cima
         self.carrito.last()
     }
 }
 
-pub fn cart(){
+pub fn cart(){  //Pruebas
     let mut carrito1=Carrito::carrito_nuevo();
     let m=2.3;
     let n="pan";
