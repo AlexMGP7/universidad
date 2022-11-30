@@ -1,51 +1,80 @@
 use std::collections::VecDeque;
-use crate::cart;
-pub struct Cola{
-    cola:VecDeque<cart::Carrito>,
-    nom_cajera:String,
-    carritos_pendientes:u32,
-    dinero_recaudado:f64,
-    frente:u32,
-    fondo:u32,
+use crate::cart::{self};
+
+#[allow(dead_code)]
+pub struct Queue{
+    pub cola:VecDeque<cart::Carrito>,
+    pub nom_cajera:String,
+    pub carritos_pendientes:String,
+    pub dinero_recaudado:String,
+
 }
 
-impl Cola {
-    fn cola_nueva(nom_cajera:String ,carritos_pendientes:u32,dinero_recaudado:f64) -> Self{
-        Cola { cola: (VecDeque::new()), nom_cajera: (nom_cajera), carritos_pendientes: (carritos_pendientes), dinero_recaudado: (dinero_recaudado) }
+impl Queue {
+    #[allow(dead_code)]
+    pub fn cola_nueva(nom_cajera:String ,carritos_pendientes:String,dinero_recaudado:String) -> Self{
+        Queue { cola: (VecDeque::new()), nom_cajera: (nom_cajera), carritos_pendientes: (carritos_pendientes), dinero_recaudado: (dinero_recaudado) }
     }
 
-    fn encolar(&mut self, carro_a_insertar: cart::Carrito){
+    #[allow(dead_code)]
+    pub fn encolar(&mut self, carro_a_insertar: cart::Carrito){
         self.cola.push_back(carro_a_insertar)
     }
 
-    fn desencolar(&mut self) -> Option<cart::Carrito>{
-        self.cola.pop_front()
+    #[allow(dead_code)]
+    pub fn desencolar(&mut self) -> Option<cart::Carrito>{
+        if !self.vacia(){
+            self.cola.pop_front()
+        }
+        else{
+            println!("No se puede desencolar, la cola esta vacia");
+            return None;
+        }
     }
 
-    fn vacia(&mut self) -> bool{
+    pub fn vacia(&mut self) -> bool{
         self.cola.is_empty()
     }
-
-    fn frente(&mut self) -> Option<&mut cart::Carrito>{
-        self.cola.front_mut()
+    #[allow(dead_code)]
+    pub fn frente(&mut self) -> Option<&cart::Carrito>{
+        self.cola.front()
     }
 
-    fn fondo(&mut self) -> Option<&mut cart::Carrito>{
-        self.cola.back_mut()
+    #[allow(dead_code)]
+    pub fn fondo(&mut self) -> Option<&cart::Carrito>{
+        self.cola.back()
     }
 
     }
 
-pub fn queue(){
-    let mut cola1 = Cola::cola_nueva("alejandra".to_string(), 2, 50.3)
+/* pub fn queue(){ //Pruebas
+    let mut cola1 = Queue::cola_nueva("alejandra".to_string(), "2".to_string(), "50.3".to_string());
     let mut carro1=cart::Carrito::carrito_nuevo();
+    let carro11=cart::Carrito::carrito_nuevo();
     let m=2.3;
     let n="pan";
+    let m11=5.4;
+    let n11="azucar";
     carro1.push(cart::Producto::producto_nuevo(m, n.to_string()));
+    carro1.push(cart::Producto::producto_nuevo(m11, n11.to_string()));
     cola1.encolar(carro1);
-
-    let mut valor=cola1.frente().unwrap();
-    let mut cimacarro1=valor.cima().unwrap();
-    cimacarro1[0]
-    println!("{}",cimacarro1[0]);
+    let valor=cola1.frente().unwrap();
+    let cimacarro1=valor.cima().unwrap();
+    println!("{} {}",cimacarro1.n_producto, cimacarro1.p_precio);
+    cola1.encolar(carro11);
+    println!("el nombre de la cajera es {}",cola1.nom_cajera);
+    let valor=cola1.frente().unwrap();
+    let cimacarro1=valor.cima().unwrap();
+    println!("{} {}",cimacarro1.n_producto, cimacarro1.p_precio);
+    let mut cola2 = Queue::cola_nueva("maria".to_string(), 3, 23.3);
+    let mut carro2=cart::Carrito::carrito_nuevo();
+    let m2=4.4;
+    let n2="huevo";
+    carro2.push(cart::Producto::producto_nuevo(m2, n2.to_string()));
+    cola2.encolar(carro2);
+    println!("el nombre de la cajera es {}",cola2.nom_cajera);
+    let valor2=cola2.frente().unwrap();
+    let cimacarro2=valor2.cima().unwrap();
+    println!("{} {}",cimacarro2.n_producto, cimacarro2.p_precio);
 }
+ */

@@ -1,8 +1,9 @@
 pub struct Producto{        //Se crea la estructura producto (Equivalente a un nodo hablando en un caso general)
-    n_producto:String,  //Nombre del producto
-    p_precio:f64        //Precio del producto
+    pub n_producto:String,  //Nombre del producto
+    pub p_precio:f64        //Precio del producto
 }
 
+#[allow(dead_code)]
 impl Producto {         //Las implementaciones del producto
     pub fn producto_nuevo(precio:f64, producto:String)->Self{ Producto { //Funcion para crear un producto nuevo
         n_producto:producto, p_precio:precio,   //Las variables de las estructuras valdran lo que se pase aca por parametros
@@ -10,11 +11,12 @@ impl Producto {         //Las implementaciones del producto
 }
 
 pub struct Carrito{     //Se crea la estructura Carrito (Equivalente a la pila hablando de un caso general)
-    carrito:Vec<Producto>,  //El contenedor de productos del carrito como vector
-    max_productos:u32,      //El maximo de productos para el carrito
-    tope:u32,               //El tope actual del carrito (Se utiliza mas o menos como un indice)
+    pub carrito:Vec<Producto>,  //El contenedor de productos del carrito como vector
+    pub max_productos:u32,      //El maximo de productos para el carrito
+    pub tope:u32,               //El tope actual del carrito (Se utiliza mas o menos como un indice)
 }
 
+#[allow(dead_code)]
 impl Carrito {      //Las implementaciones del carrito
     pub fn carrito_nuevo() -> Self{     //Funcion para crear un carrito nuevo
         Carrito { carrito: (Vec::new()), max_productos: (15), tope: (0) }
@@ -66,7 +68,7 @@ impl Carrito {      //Las implementaciones del carrito
     }
 }
 
-pub fn cart(){  //Pruebas
+/* pub fn cart(){  //Pruebas
     let mut carrito1=Carrito::carrito_nuevo();
     let m=2.3;
     let n="pan";
@@ -100,4 +102,4 @@ pub fn cart(){  //Pruebas
 
     }
 
-}
+} */
