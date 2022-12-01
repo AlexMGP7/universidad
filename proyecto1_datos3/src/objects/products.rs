@@ -1,4 +1,5 @@
 #[derive(Debug)]
+#[derive(Clone)]
 pub struct Producto{        //Se crea la estructura producto (Equivalente a un nodo hablando en un caso general)
     pub producto:String,  //Nombre del producto
     pub precio:f32        //Precio del producto
