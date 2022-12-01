@@ -1,9 +1,9 @@
 use std::collections::VecDeque;
-use crate::cart::{self};
+use super::cart::Carrito;
 
 #[allow(dead_code)]
 pub struct Queue{
-    pub cola:VecDeque<cart::Carrito>,
+    pub cola:VecDeque<Carrito>,
     pub nom_cajera:String,
     pub carritos_pendientes:String,
     pub dinero_recaudado:String,
@@ -17,12 +17,12 @@ impl Queue {
     }
 
     #[allow(dead_code)]
-    pub fn encolar(&mut self, carro_a_insertar: cart::Carrito){
+    pub fn encolar(&mut self, carro_a_insertar: Carrito){
         self.cola.push_back(carro_a_insertar)
     }
 
     #[allow(dead_code)]
-    pub fn desencolar(&mut self) -> Option<cart::Carrito>{
+    pub fn desencolar(&mut self) -> Option<Carrito>{
         if !self.vacia(){
             self.cola.pop_front()
         }
@@ -36,12 +36,12 @@ impl Queue {
         self.cola.is_empty()
     }
     #[allow(dead_code)]
-    pub fn frente(&mut self) -> Option<&cart::Carrito>{
+    pub fn frente(&mut self) -> Option<&Carrito>{
         self.cola.front()
     }
 
     #[allow(dead_code)]
-    pub fn fondo(&mut self) -> Option<&cart::Carrito>{
+    pub fn fondo(&mut self) -> Option<&Carrito>{
         self.cola.back()
     }
 

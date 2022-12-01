@@ -1,10 +1,8 @@
-#[allow(dead_code)]
-mod lectura;
-mod cart;
-mod cola;
+use objects::lecture::leer;
 
+mod objects;
 fn main(){
-    lectura::leer()
+    leer()
     //LSE::Test()
     //cart::cart()
     //cola::queue()

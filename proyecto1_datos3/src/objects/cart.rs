@@ -1,14 +1,4 @@
-pub struct Producto{        //Se crea la estructura producto (Equivalente a un nodo hablando en un caso general)
-    pub n_producto:String,  //Nombre del producto
-    pub p_precio:f64        //Precio del producto
-}
-
-#[allow(dead_code)]
-impl Producto {         //Las implementaciones del producto
-    pub fn producto_nuevo(precio:f64, producto:String)->Self{ Producto { //Funcion para crear un producto nuevo
-        n_producto:producto, p_precio:precio,   //Las variables de las estructuras valdran lo que se pase aca por parametros
-    } }
-}
+use super::products::Producto;
 
 pub struct Carrito{     //Se crea la estructura Carrito (Equivalente a la pila hablando de un caso general)
     pub carrito:Vec<Producto>,  //El contenedor de productos del carrito como vector

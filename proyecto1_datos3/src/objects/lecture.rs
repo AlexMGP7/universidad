@@ -1,13 +1,12 @@
 use std::{fs};
 
-//use crate::cola;
-//use std::env;
-
 #[allow(dead_code)]
 pub fn leer(){
     println!("Leyendo el archivo de entrada {}","QSM.txt");
-    let contenido = fs::read_to_string("QSM.txt").unwrap();
+    let contenido = fs::read_to_string("QSM.txt").expect("Something went wrong reading the file");
+
     let arr_text: Vec<&str> =contenido.lines().collect();
+
     let mut cajeros= Vec::new();
     for x in 0..3{
         cajeros.push(arr_text[x]);
@@ -42,6 +41,6 @@ pub fn leer(){
         println!("[{}]",carritos[x-3]);
     }
 
-
+    
 
 }
