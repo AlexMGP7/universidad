@@ -1,5 +1,6 @@
 use super::products::Producto;
 
+#[derive(Debug)]
 pub struct Carrito{     //Se crea la estructura Carrito (Equivalente a la pila hablando de un caso general)
     pub carrito:Vec<Producto>,  //El contenedor de productos del carrito como vector
     pub max_productos:u32,      //El maximo de productos para el carrito
@@ -23,7 +24,6 @@ impl Carrito {      //Las implementaciones del carrito
             println!("No se puede sacar el producto, carrito lleno");
             return None;
         }
-
     }
 
     pub fn llena(&self) -> bool {       //Funcion para saber si el carrito esta lleno de productos
@@ -33,7 +33,7 @@ impl Carrito {      //Las implementaciones del carrito
         else {
             false
         }
-        }
+    }
 
     pub fn push(&mut self, producto_a_insertar: Producto){  //Funcion para agregar un producto al carrito por el tope
         if self.llena(){
