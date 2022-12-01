@@ -23,6 +23,7 @@ impl Cajera{
         self.cola.pop_front();
     }
 
+    #[allow(dead_code)]
     pub fn frente(&mut self) -> Option<&Carrito>{
         self.cola.front()
     }

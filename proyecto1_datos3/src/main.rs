@@ -8,6 +8,6 @@ fn main(){
     println!("{:?}",carrito);
     let mut cajera=Cajera::cajera_nueva("yuleitsis".to_string(), 3.2);
     cajera.encolar(carrito);
-    println!("{:?}",cajera.desencolar());
+    println!("{:?}",cajera.frente());
     println!("{:?}",cajera);
 }
