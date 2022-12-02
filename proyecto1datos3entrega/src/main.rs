@@ -170,6 +170,67 @@ pub fn leer_cajera1() -> Cajera{
 
 }
 
+fn leer_datos(){
+    const NUMEROAJ:i32=3;
+    let mut numerc=NUMEROAJ.clone();
+    let contenido = fs::read_to_string("QSM.txt").unwrap();
+    let mut contenido=contenido.lines();
+    let mut arregloprin:Vec<String>=Vec::new();
+    let mut nombre2="".to_string();
+    let mut precio:f32;
+    let mut caj = 0;
+    let mut _col=Cajera::cajera_nueva("".to_string(), "".parse::<f32>().unwrap());
+    let mut h:usize=0;
+    let mut caj2=0;
+    loop{
+        match contenido.next() {
+            Some(valor)=> {
+                let mut valors=valor.split(',');
+                loop {
+                match valors.next().take() {
+                    Some(aux)=>{
+                            let mut aux2=aux.split_whitespace();
+                            loop {
+                               match aux2.next() {
+                                   Some(valor)=> {
+                                    if numerc >0{
+                                        if caj==0{
+                                            //aqui va el nombre de la cajera
+                                            caj=caj +1;
+                                        }else if caj==1 {
+                                            //aqui va el precio
+                                            caj=caj +1;
+                                        }else if caj==2 {
+                                            // aqui va la cantidad de cola anterior
+                                            caj=0;
+                                            numerc=numerc-1;
+                                        }
+                                    }else{
+                                        if numerc==0{
+                                            //nombre de los productos
+                                            numerc=-1;
+                                        }else {
+                                            //precio de los productos
+                                            numerc=0;
+                                        }
+                                    }
+                                    continue;
+                                   }
+                                   None=>break
+                               }
+                            }
+                        continue;
+                    }
+                    None=>break
+                }
+            }
+                continue;
+            },
+            None=>break
+        }
+    }
+}
+
 fn main(){/*
     let producto=Producto::producto_nuevo(3.2, "huevo".to_string());
     let producto2=Producto::producto_nuevo(2.8, "pan".to_string());
@@ -202,7 +263,9 @@ fn main(){/*
     println!("{}",cajera.nom_cajera);
     println!("Carritos en cola de la cajera: {}",cajera.carritos_en_espera()); */
 
-    let cajera1=leer_cajera1();
-    println!("{:?}",cajera1);
+    /* let cajera1=leer_cajera1();
+    println!("{:?}",cajera1); */
+    leer_datos();
 
 }
+
