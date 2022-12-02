@@ -1,6 +1,6 @@
-use objects::{products::Producto, cart::Carrito, cashiers::Cajera};
+use objects::{products::Producto, cart::Carrito, cashiers::Cajera, lecture};
 mod objects;
-fn main(){
+fn main(){/* 
     let producto=Producto::producto_nuevo(3.2, "huevo".to_string());
     let producto2=Producto::producto_nuevo(2.8, "pan".to_string());
     let producto3=Producto::producto_nuevo(3.2, "huevo".to_string());
@@ -29,5 +29,10 @@ fn main(){
     println!("La suma de los precios del producto del carro de la primera cajera: {}",cajera.dinero_recaudado);
     println!("Despues de sumar y agregar al recaudo de la cajera, el carro se saca de la cola(se atiende): ");
     println!("{:?}",cajera);
-    println!("Carritos en cola de la cajera 1: {}",cajera.carritos_en_espera())
+    println!("{}",cajera.nom_cajera);
+    println!("Carritos en cola de la cajera: {}",cajera.carritos_en_espera()); */
+
+    let cajera1=lecture::leerCajera1();
+    println!("{:?}",cajera1);
+
 }
