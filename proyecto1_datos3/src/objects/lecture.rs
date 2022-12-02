@@ -3,7 +3,7 @@ use std::{fs};
 use crate::objects::cashiers;
 
 #[allow(dead_code)]
-pub fn leerCajera1() -> cashiers::Cajera{
+pub fn leer_cajera1() -> cashiers::Cajera{
     println!("Leyendo el archivo de entrada {}","QSM.txt");
     let contenido = fs::read_to_string("QSM.txt").expect("Something went wrong reading the file");
 
