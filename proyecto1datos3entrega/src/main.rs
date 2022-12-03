@@ -116,7 +116,7 @@ impl Cajera{
         println!("La cajera {} esta atendiendo un carro...",self.nom_cajera);
 
         let monto_total_carrito=sumar_productos(carrito);//Se saca el monto total del carrito sumando los productos
-        println!("El monto total del carro es: {}$",monto_total_carrito);
+        println!("El monto total del carro es: {}$",(monto_total_carrito*100.00).round()/100.00);
         self.dinero_recaudado=self.dinero_recaudado+monto_total_carrito;//Se van sumando al dinero recaudado
         self.desencolar();//Se desencola el carrito
 
@@ -129,7 +129,7 @@ impl Cajera{
                 suma += carrito.pop().unwrap().precio;//Si hay otro producto, se suma a los anteriores
             }
         }
-        println!("Ahora el dinero recaudado de la cajera {} es: {}$",self.nom_cajera,self.dinero_recaudado);
+        println!("Ahora el dinero recaudado de la cajera {} es: {}$",self.nom_cajera,(self.dinero_recaudado*100.00).round()/100.00);
         println!("");
     }
 }
@@ -200,8 +200,8 @@ fn main(){
             for producto in linea_texto.trim().split(",") {
                 let vec_contenedor = producto.trim().split(" ").collect::<Vec<&str>>();
 
-                let producto = Producto::producto_nuevo(vec_contenedor[1].parse().unwrap(),vec_contenedor[0].to_string());
-                carro.push(producto);
+                let producto_a_insertar = Producto::producto_nuevo(vec_contenedor[1].parse().unwrap(),vec_contenedor[0].to_string());
+                carro.push(producto_a_insertar);
             }
         cajera.encolar(carro);
         }
@@ -219,12 +219,15 @@ fn main(){
     println!("Mostrando todas las cajeras: ");
     println!("{:?}",cajeras);
 
-    let dinero_recaudado=cajeras[0].dinero_recaudado+cajeras[1].dinero_recaudado+cajeras[2].dinero_recaudado;
+    let mut dinero_recaudado:f32=0.00;
+
+    for x in 0..cajeras.len(){
+        dinero_recaudado += cajeras[x].dinero_recaudado;
+    }
 
     println!("");
-    println!("El dinero total recaudado por el supermercado: {}$",dinero_recaudado);
+    println!("El dinero total recaudado por el supermercado: {}$",(dinero_recaudado*100.00).round()/100.00);
     println!("Se despedira al cajero: {} por no haber recaudado dinero",cajeras[2].nom_cajera)
-
 
     //141.28
 
