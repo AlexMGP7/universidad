@@ -1,3 +1,5 @@
+//Alexander Gonzalez / 30.230.460
+
 use std::collections::VecDeque;//Usamos la libreria local VecDeque, que tiene todas las funciones de una cola
 use std::{fs};//Libreria local para leer el archivo .txt entrante
 
@@ -16,6 +18,7 @@ impl Producto {         //Las implementaciones del producto
         }
     }
 }
+#[derive(Clone)]
 #[derive(Debug)]
 pub struct Carrito{     //Se crea la estructura Carrito (Equivalente a la pila hablando de un caso general)
     pub carrito:Vec<Producto>,  //El contenedor de productos del carrito como vector
@@ -68,49 +71,52 @@ impl Carrito {      //Las implementaciones del carrito
         self.carrito.last()
     }
 }
-
+#[derive(Clone)]
 #[derive(Debug)]//Para poder testear y ver todo los atributos que tiene el objeto de manera general
 pub struct Cajera{//Creamos el objeto cajera, la cual sera nuestra "cola" hablando en terminos generales
     pub nom_cajera:String,
     pub dinero_recaudado:f32,
-    pub linea: VecDeque<Carrito>//Creamos la linea de carritos de la cajera
-    //(Los carritos en espera, es un metodo de la implementacion de la estructura, no un atributo)
+    pub linea_texto: VecDeque<Carrito>,//Creamos la linea_texto de carritos de la cajera
+    pub carritos_en_espera:u32,//Los carritos en espera
 }
 
 impl Cajera{
 
     #[allow(dead_code)]
-    pub fn cajera_nueva(nom_cajera:String,dinero_recaudado:f32) -> Self{//Funcion para crear una cajera nueva
-        Cajera{ nom_cajera, dinero_recaudado, linea:VecDeque::new() }
+    pub fn cajera_nueva(nom_cajera:String,dinero_recaudado:f32, carritos_en_espera:u32) -> Self{//Funcion para crear una cajera nueva
+        Cajera{ nom_cajera, dinero_recaudado, linea_texto:VecDeque::new(), carritos_en_espera }
     }
 
     #[allow(dead_code)]
     pub fn encolar(&mut self, carrito:Carrito){ //Funcion para colas enconlar(Poner en la fila al carrito)
-        self.linea.push_back(carrito);
+        self.linea_texto.push_back(carrito);
     }
 
     #[allow(dead_code)]
     pub fn desencolar(&mut self){ //Funcion para colas desencolar(Quitar de la fila al carrito)
-        self.linea.pop_front();
+        self.linea_texto.pop_front();
     }
 
     #[allow(dead_code)]
     pub fn frente(&mut self) -> Option<&Carrito>{//Lo que valga el frente en la cola en ese momento
-        self.linea.front()
+        self.linea_texto.front()
     }
 
     #[allow(dead_code)]
     pub fn fondo(&mut self) -> Option<&Carrito>{//Lo que valga el fondo en la cola en ese momento
-        self.linea.back()
+        self.linea_texto.back()
     }
     #[allow(dead_code)]
-    pub fn carritos_en_espera(&mut self) -> usize{//Los carritos en espera de la cajera
-        self.linea.len()
+    pub fn carritos_en_espera_actuales(&mut self) -> usize{//Los carritos en espera de la cajera asignados
+        self.linea_texto.len()
     }
 
     #[allow(dead_code)]
     pub fn sumar_dinero(&mut self, carrito:Carrito){//Sumar el dinero de un carro y agregarlo a total recaudado
+        println!("La cajera {} esta atendiendo un carro...",self.nom_cajera);
+
         let monto_total_carrito=sumar_productos(carrito);//Se saca el monto total del carrito sumando los productos
+        println!("El monto total del carro es: {}$",monto_total_carrito);
         self.dinero_recaudado=self.dinero_recaudado+monto_total_carrito;//Se van sumando al dinero recaudado
         self.desencolar();//Se desencola el carrito
 
@@ -123,149 +129,104 @@ impl Cajera{
                 suma += carrito.pop().unwrap().precio;//Si hay otro producto, se suma a los anteriores
             }
         }
+        println!("Ahora el dinero recaudado de la cajera {} es: {}$",self.nom_cajera,self.dinero_recaudado);
+        println!("");
     }
 }
 
-
-#[allow(dead_code)]
-pub fn leer_cajera1() -> Cajera{
-    println!("Leyendo el archivo de entrada {}","QSM.txt");
+fn main(){
+    println!("Leyendo el archivo de entrada {}","QSM.txt");//Se lee el archivo
     let contenido = fs::read_to_string("QSM.txt").expect("Something went wrong reading the file");
 
-    let arr_text: Vec<&str> =contenido.lines().collect();
+    let mut arr_text: Vec<&str> =contenido.lines().collect();//Se divide en lineas
+    let mut arr_text_iterable=arr_text.iter_mut();//Se convierte en iterable
 
-    let mut cajeros:Vec<&str>= Vec::new();
-    for x in 0..3{
-        cajeros.push(arr_text[x]);
-        println!("[{}]",cajeros[x]);
+    let mut cajeras=Vec::new();//Se crea el vector de cajeras
+
+    println!("");
+    println!("-----Procesando carritos en espera predefinidos en una cajero-----");
+    println!("");
+
+    for _ in 0..3 {
+        let linea_texto = arr_text_iterable.next().unwrap();//Se leen las cajeras
+        let vec_contenedor = linea_texto.trim().split(" ").collect::<Vec<&str>>();//Se divide por espacios
+
+        let nom_cajera = vec_contenedor[0].to_string();
+        let dinero_recaudado = vec_contenedor[1].parse().unwrap();
+        let carritos_en_espera = vec_contenedor[2].parse().unwrap();
+
+        let cajera = Cajera::cajera_nueva(nom_cajera, dinero_recaudado, carritos_en_espera);//Se crea la cajera
+
+        cajeras.push(cajera);
     }
 
-    let data=cajeros[0].trim().split(" ").collect::<Vec<&str>>();
-    let mut arr_datos_cajero:Vec<&str>=Vec::new();
-    for x in data{
-        arr_datos_cajero.push(x);
-    }
+    for cajera in cajeras.iter_mut() {
+        for _ in 0..cajera.carritos_en_espera{
+            let linea_texto = arr_text_iterable.next().unwrap();
 
-    return Cajera::cajera_nueva(arr_datos_cajero[0].to_string(), arr_datos_cajero[1].parse::<f32>().unwrap());
+            let mut carro = Carrito::carrito_nuevo();
 
-    //println!("{:?}",arr_datos_cajero);
+            for producto in linea_texto.trim().split(",") {
+                let vec_contenedor = producto.trim().split(" ").collect::<Vec<&str>>();
 
-    /* let datos_cajeros2=cajeros[1].split_whitespace();
-    let mut arr_datos_cajero2:Vec<&str>=Vec::new();
-    for x in datos_cajeros2{
-        arr_datos_cajero2.push(x);
-    }
-
-    let datos_cajeros3=cajeros[2].split_whitespace();
-    let mut arr_datos_cajero3:Vec<&str>=Vec::new();
-    for x in datos_cajeros3{
-        arr_datos_cajero3.push(x);
-    }
-
-    let mut carritos=Vec::new();
-    for x in 3..arr_text.len(){
-        carritos.push(arr_text[x]);
-        println!("[{}]",carritos[x-3]);
-    } */
-
-}
-
-fn leer_datos(){
-    const NUMEROAJ:i32=3;
-    let mut numerc=NUMEROAJ.clone();
-    let contenido = fs::read_to_string("QSM.txt").unwrap();
-    let mut contenido=contenido.lines();
-    let mut arregloprin:Vec<String>=Vec::new();
-    let mut nombre2="".to_string();
-    let mut precio:f32;
-    let mut caj = 0;
-    let mut _col=Cajera::cajera_nueva("".to_string(), "".parse::<f32>().unwrap());
-    let mut h:usize=0;
-    let mut caj2=0;
-    loop{
-        match contenido.next() {
-            Some(valor)=> {
-                let mut valors=valor.split(',');
-                loop {
-                match valors.next().take() {
-                    Some(aux)=>{
-                            let mut aux2=aux.split_whitespace();
-                            loop {
-                               match aux2.next() {
-                                   Some(valor)=> {
-                                    if numerc >0{
-                                        if caj==0{
-                                            //aqui va el nombre de la cajera
-                                            caj=caj +1;
-                                        }else if caj==1 {
-                                            //aqui va el precio
-                                            caj=caj +1;
-                                        }else if caj==2 {
-                                            // aqui va la cantidad de cola anterior
-                                            caj=0;
-                                            numerc=numerc-1;
-                                        }
-                                    }else{
-                                        if numerc==0{
-                                            //nombre de los productos
-                                            numerc=-1;
-                                        }else {
-                                            //precio de los productos
-                                            numerc=0;
-                                        }
-                                    }
-                                    continue;
-                                   }
-                                   None=>break
-                               }
-                            }
-                        continue;
-                    }
-                    None=>break
-                }
+                let producto = Producto::producto_nuevo(vec_contenedor[1].parse().unwrap(),vec_contenedor[0].to_string());
+                carro.push(producto);
             }
-                continue;
-            },
-            None=>break
+        cajera.encolar(carro);
         }
     }
-}
+    for cajera in cajeras.iter_mut() {
+        //println!("[{:?}]",cajera);
+        while cajera.carritos_en_espera_actuales() > 0 {
+            let carro_actual=cajera.frente().unwrap().clone();
+            cajera.sumar_dinero(carro_actual);
+            //println!("{}",cajera.dinero_recaudado);
+        }
+    }
 
-fn main(){/*
-    let producto=Producto::producto_nuevo(3.2, "huevo".to_string());
-    let producto2=Producto::producto_nuevo(2.8, "pan".to_string());
-    let producto3=Producto::producto_nuevo(3.2, "huevo".to_string());
-    let producto4=Producto::producto_nuevo(2.8, "pan".to_string());
-    println!("Creando producto 1:");
-    println!("{:?}",producto);
-    println!("Creando producto 2:");
-    println!("{:?}",producto2);
-    println!("Creando producto 3:");
-    println!("{:?}",producto3);
-    println!("Creando producto 4:");
-    println!("{:?}",producto4);
-    let mut carrito=Carrito::carrito_nuevo();
-    let mut carrito2=Carrito::carrito_nuevo();
-    carrito.push(producto);
-    carrito.push(producto2);
-    carrito2.push(producto3);
-    carrito2.push(producto4);
-    println!("Creando carrito nuevo e introduciendo los productos: ");
-    println!("{:?}",carrito);
-    let mut cajera=Cajera::cajera_nueva("yuleitsis".to_string(), 0.0);
-    cajera.encolar(carrito.clone());
-    println!("Agregando el carrito con productos a la cola de una cajera: ");
-    println!("{:?}",cajera);
-    cajera.sumar_dinero(carrito.clone());
-    println!("La suma de los precios del producto del carro de la primera cajera: {}",cajera.dinero_recaudado);
-    println!("Despues de sumar y agregar al recaudo de la cajera, el carro se saca de la cola(se atiende): ");
-    println!("{:?}",cajera);
-    println!("{}",cajera.nom_cajera);
-    println!("Carritos en cola de la cajera: {}",cajera.carritos_en_espera()); */
+    println!("Mostrando todas las cajeras por el momento: ");
+    println!("{:?}",cajeras);
 
-    /* let cajera1=leer_cajera1();
-    println!("{:?}",cajera1); */
-    leer_datos();
+    println!("");
+    println!("-----Procesando carritos sobrantes en el archivo de texto-----");
+    println!("");
+
+    for cajera in cajeras.iter_mut() {
+        for _ in 0..cajera.carritos_en_espera{
+            let linea_texto = arr_text_iterable.next().unwrap();
+
+            let mut carro = Carrito::carrito_nuevo();
+
+            for producto in linea_texto.trim().split(",") {
+                let vec_contenedor = producto.trim().split(" ").collect::<Vec<&str>>();
+
+                let producto = Producto::producto_nuevo(vec_contenedor[1].parse().unwrap(),vec_contenedor[0].to_string());
+                carro.push(producto);
+            }
+        cajera.encolar(carro);
+        }
+    }
+
+    for cajera in cajeras.iter_mut() {
+        //println!("[{:?}]",cajera);
+        while cajera.carritos_en_espera_actuales() > 0 {
+            let carro_actual=cajera.frente().unwrap().clone();
+            cajera.sumar_dinero(carro_actual);
+            //println!("{}",cajera.dinero_recaudado);
+        }
+    }
+
+    println!("Mostrando todas las cajeras: ");
+    println!("{:?}",cajeras);
+
+    let dinero_recaudado=cajeras[0].dinero_recaudado+cajeras[1].dinero_recaudado+cajeras[2].dinero_recaudado;
+
+    println!("");
+    println!("El dinero total recaudado por el supermercado: {}$",dinero_recaudado);
+    println!("Se despedira al cajero: {} por no haber recaudado dinero",cajeras[2].nom_cajera)
+
+
+    //141.28
 
 }
 
