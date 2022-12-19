@@ -135,6 +135,7 @@ impl Cajera{
 }
 
 fn main(){
+    //Alexander Gonzalez / 30.230.460
     println!("Leyendo el archivo de entrada {}","QSM.txt");//Se lee el archivo
     let contenido = fs::read_to_string("QSM.txt").expect("Something went wrong reading the file");
 

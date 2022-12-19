@@ -5,15 +5,15 @@ use super::cart::Carrito;//Exportamos los carritos en la cajera
 pub struct Cajera{//Creamos el objeto cajera, la cual sera nuestra "cola" hablando en terminos generales
     pub nom_cajera:String,
     pub dinero_recaudado:f32,
-    pub linea: VecDeque<Carrito>//Creamos la linea de carritos de la cajera
-    //(Los carritos en espera, es un metodo de la implementacion de la estructura, no un atributo)
+    pub linea: VecDeque<Carrito>,//Creamos la linea de carritos de la cajera
+    pub carritos_en_espera:u32,//Los carritos en espera
 }
 
 impl Cajera{
 
     #[allow(dead_code)]
-    pub fn cajera_nueva(nom_cajera:String,dinero_recaudado:f32) -> Self{//Funcion para crear una cajera nueva
-        Cajera{ nom_cajera, dinero_recaudado, linea:VecDeque::new() }
+    pub fn cajera_nueva(nom_cajera:String,dinero_recaudado:f32, carritos_en_espera:u32) -> Self{//Funcion para crear una cajera nueva
+        Cajera{ nom_cajera, dinero_recaudado, linea:VecDeque::new(), carritos_en_espera }
     }
 
     #[allow(dead_code)]
@@ -36,13 +36,16 @@ impl Cajera{
         self.linea.back()
     }
     #[allow(dead_code)]
-    pub fn carritos_en_espera(&mut self) -> usize{//Los carritos en espera de la cajera
+    pub fn carritos_en_espera_actuales(&mut self) -> usize{//Los carritos en espera de la cajera asignados
         self.linea.len()
     }
 
     #[allow(dead_code)]
     pub fn sumar_dinero(&mut self, carrito:Carrito){//Sumar el dinero de un carro y agregarlo a total recaudado
+        println!("La cajera {} esta atendiendo un carro...",self.nom_cajera);
+
         let monto_total_carrito=sumar_productos(carrito);//Se saca el monto total del carrito sumando los productos
+        println!("El monto total del carro es: {}$",(monto_total_carrito*100.00).round()/100.00);
         self.dinero_recaudado=self.dinero_recaudado+monto_total_carrito;//Se van sumando al dinero recaudado
         self.desencolar();//Se desencola el carrito
 
@@ -55,5 +58,7 @@ impl Cajera{
                 suma += carrito.pop().unwrap().precio;//Si hay otro producto, se suma a los anteriores
             }
         }
+        println!("Ahora el dinero recaudado de la cajera {} es: {}$",self.nom_cajera,(self.dinero_recaudado*100.00).round()/100.00);
+        println!("");
     }
 }
