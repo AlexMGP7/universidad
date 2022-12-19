@@ -1,0 +1,45 @@
+
+*{
+	font-family:'Lobster', cursive;
+	font-weight: 100;
+	font-size: 30px;
+}
+
+div{
+	width: 200px;
+	height: 200px;
+	display: block;
+	background: yellow;
+}
+
+.caja1 {
+	background-color: orange;
+	position: absolute; /*posicion absoluta quita el espacio reservado, por eso la caja 2 va hacia arriba*/
+}
+
+.caja2 {
+	background-color:green;
+	position: relative;
+	top: 40px;
+	left: 20px;
+	z-index: 100;
+}
+
+.caja3 {
+	background-color: lightblue;
+	position: relative;
+	z-index: 1000;
+}
+
+.contenedor {
+	background: yellow;
+	position: relative;
+}
+
+.hijo {
+	background: red;
+	position: relative;
+	top: 20px;
+	left: 20px;
+	/*z-index: -1; EL PADRE SOLO SE PUEDE PONER ENCIMA DEL HIJO CON ESTO*/
+}

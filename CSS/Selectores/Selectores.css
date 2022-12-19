@@ -1,0 +1,35 @@
+/*SELECTORES
+
+*{	UNIVERSAL
+	color: #f00;
+}
+
+p{	POR TIPO
+	color: #f00;
+}
+
+.titulo-p2{	POR CLASE
+	color: #f00;
+}
+
+
+#id-element{ POR ID
+	color: #f00;
+}  
+
+[rancio="sii"]{	POR ATRIBUTO
+	color: blue;
+}
+
+h2 p{ POR DESCENDIENTE
+	color: #f00;
+}
+
+.P p{ (Seleccionando a los p que esten dentro de un elemento que tenga la clase P)
+	color: #f00;
+}
+
+.P p:hover{ Pseudo clase de manera descendiente 
+	color: #f00;
+}
+*/

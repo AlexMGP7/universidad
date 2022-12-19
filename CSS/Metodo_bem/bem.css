@@ -1,0 +1,11 @@
+/*.form__input:first-child {
+	color: red;
+}
+*/
+.form__input--active{
+	color: red;
+}
+
+.div__p-h3{
+	color: red;
+}

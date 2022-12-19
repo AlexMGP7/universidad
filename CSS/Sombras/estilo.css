@@ -1,0 +1,20 @@
+
+*{
+	font-family:'Lobster', cursive;
+	font-weight: 100;
+	font-size: 30px;
+}
+
+h2 {
+	background-color: red;
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 100px;
+	text-align: center;/*centrar el texto*/
+	margin: 20px 10px;/*margen entre cada caja*/
+	border-radius: 2em;/*redondear el borde*/
+	border: 5px solid #a22;
+	box-shadow: 30px/*+x*/ 10px /*-y*/10px /*difuminar*/10px /*rellenar*/black;
+	text-shadow: 2px 2px 7px #fff, 2px 2px 7px #fff;
+	transform: rotate(90deg);/*para rotarlo*/
+}

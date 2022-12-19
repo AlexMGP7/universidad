@@ -1,0 +1,22 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+.contact-form{
+	font-size: 25px;
+}
+.contact-form__h2{
+	font-size: 2em;/*tamaño de la letra*/
+	font-family: 'Shadows Into Light', cursive;/*tipografia*/
+	line-height: 2;/*Lo que ocupa la letra de espacio vacio*/
+	font-weight: 700;/* el grosor*/
+	color: #f00;
+}
+.contact-form__p{
+	font-size: 1em;/*tamaño de la letra*/
+	font-family: 'lobster', cursive;/*tipografia*/
+	line-height: 1;/*Lo que ocupa la letra de espacio vacio*/
+	font-weight: 100;/* el grosor*/
+	color: black;
+}

@@ -1,0 +1,36 @@
+
+h1 {
+	color:  grey !important /*1*/
+}
+
+
+/*2.ESTILO EN LINEA EN EL HTML*/
+
+/*3*/#blue{
+	color: green;
+}
+/*4*/.clase{
+	color: blue;
+}
+
+/*4*/[atributo="azul"]{
+	color: blue;
+}
+
+/*5*/h1{
+	color: yellow;
+}
+/*
+JERARQUIA (SI SON IGUALES ES POR CASCADAS(EL ULTIMO ES EL QUE MANDA))
+1.!important
+2.Estilos en linea
+3.Identificadores
+4.
+*clases
+*pseudo-clases
+*atributos
+
+5.
+*elementos
+*pseudo-elementos
+*/

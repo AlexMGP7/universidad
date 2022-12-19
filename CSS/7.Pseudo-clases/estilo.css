@@ -1,0 +1,99 @@
+
+*{
+	font-family:'Lobster', cursive;
+	font-weight: 100;
+	font-size: 30px;
+}
+/*:hover
+.caja1{
+	margin: auto;
+	margin-top: 100px;
+	background: slateblue;
+	height: 200px;
+	width: 200px;
+	border: 3px solid red;
+	color: #fff;
+	transition: background 1s, height 1s, width 1s, border 1s;all 1s, border 1s
+}
+
+.caja1:hover{
+	background: darkslateblue;
+	height: 300px;
+	width: 300px;
+	border-color: blue;
+	color: #000;
+}
+
+/*:link y visited
+
+
+
+.caja1:link{ antes de visitar(se puede cualquier propiedad)
+	color: red;
+}
+
+a:link{
+	color: blue;
+}
+
+a:visited{despues de visitar
+	color: violet;
+}
+
+*/
+
+/*active
+
+.caja{
+	width: 300px;
+	height: 300px;
+	background: red
+	margin: auto;
+	margin-top: 100px;
+	transition: all .5s;
+}
+
+.caja:active{
+	background: blueviolet;
+	width: 400px;
+	height: 400px;
+
+}
+
+*/
+
+/*focus
+.caja:hover{
+	background: lightgrey;
+}
+.caja{
+	margin-left: 200px;
+	margin-top: 100px;
+	border: 4px solid black;
+	transition: all .3s;
+}
+.caja:active{
+	background: grey;
+}
+.caja:focus{
+	border: 5px solid orangered;
+	padding: 5px;
+}
+*/
+
+/*Lang
+.caja{
+	margin: 25px;
+}
+
+.caja b:lang(es){
+	color: blue;
+	padding: 20px;
+}
+
+.caja b:lang(en){
+	color: red;
+	padding: 20px;
+}
+
+*/

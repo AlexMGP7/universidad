@@ -1,0 +1,19 @@
+*{
+	font-family:'Lobster', cursive;
+	font-weight: 100;
+}
+
+.contact-form{
+	font-size: 25px;
+}
+
+.contact-form__h2{
+	font-size: 2em;
+	color: blue;
+}
+
+h2 {
+	display: inline;	 /*cambiar de bloque a en linea*/
+	background-color: red;
+	display: inline-block;			
+}

@@ -1,0 +1,13 @@
+
+*{
+	font-family:'Lobster', cursive;
+	font-weight: 100;
+	font-size: 40px;
+}
+
+.caja-sticky{
+	background: red;
+	position: sticky;
+	opacity: .4;
+	top: 0;
+}

@@ -1,0 +1,88 @@
+
+*{
+	font-family:'Lobster', cursive;
+	font-weight: 100;
+	font-size: 30px;
+}
+
+
+/*--------------Si forman parte del DOOM--------------*/
+
+/*
+
+.texto{
+	padding: 20px;
+}
+
+
+
+.texto::first-line{ primera linea, NO SE PUEDE CON INLINE
+	color: blue;
+	font-size: 1.5em;
+}
+
+.texto::first-letter{ primera letra, NO SE PUEDE CON INLINE
+	color: red;
+	font-size: 2em;
+}
+*/
+/*--------------No forman parte del DOOM--------------*/
+
+/*placeholder y selection
+
+form {
+	margin: 100px auto;
+	display: block;
+	background-color: #555;
+	padding: 100px;
+	width: 50%;
+}
+
+input{
+	padding: 6px;
+	width: 100%;
+}
+
+input::placeholder{
+	color: grey;
+	font-size: 20px;
+	background-color: green;
+}
+
+input::selection{
+	color: red;
+	font-size: 20px;
+	background-color: blue;
+}
+
+p::selection{
+	color: white;
+	background-color: black;
+}
+*/
+
+/*After y before*/
+
+div{
+	margin: 100px auto;
+	display: block;
+	padding: 200px;
+	width: 50%;
+	background-color: skyblue;
+}
+
+b{
+	padding: 6px;
+	width: 100%;
+
+}
+
+b::before{
+	content: "me suscribi";
+	color: #fff;
+}
+
+b::after{
+	content: "SoyDalto";
+	color: red;
+}
